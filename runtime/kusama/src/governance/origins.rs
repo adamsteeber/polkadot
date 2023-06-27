@@ -20,7 +20,7 @@ pub use pallet_custom_origins::*;
 
 #[frame_support::pallet]
 pub mod pallet_custom_origins {
-	use crate::{Balance, GRAND, QUID};
+	use crate::{Balance, GRAND, QUID, UNITS};
 	use frame_support::pallet_prelude::*;
 
 	#[pallet::config]
@@ -48,16 +48,22 @@ pub mod pallet_custom_origins {
 		ReferendumCanceller,
 		/// Origin able to kill referenda.
 		ReferendumKiller,
-		/// Origin able to spend up to 1 KSM from the treasury at once.
-		SmallTipper,
-		/// Origin able to spend up to 5 KSM from the treasury at once.
-		BigTipper,
-		/// Origin able to spend up to 50 KSM from the treasury at once.
-		SmallSpender,
-		/// Origin able to spend up to 500 KSM from the treasury at once.
-		MediumSpender,
-		/// Origin able to spend up to 5,000 KSM from the treasury at once.
-		BigSpender,
+		/// Deprecated spending origin.
+		DeprecatedSmallTipper,
+		/// Deprecated spending origin.
+		DeprecatedBigTipper,
+		/// Deprecated spending origin.
+		DeprecatedSmallSpender,
+		/// Deprecated spending origin.
+		DeprecatedMediumSpender,
+		/// Deprecated spending origin.
+		DeprecatedBigSpender,
+		/// Origin able to spend up to 100 KSM from the treasury at once.
+		SmallBudget,
+		/// Origin able to spend up to 1,250 KSM from the treasury at once.
+		MediumBudget,
+		/// Origin able to spend up to 2,500 KSM from the treasury at once.
+		BigBudget,
 		/// Origin able to dispatch a whitelisted call.
 		WhitelistedCaller,
 		/// Origin commanded by any members of the Polkadot Fellowship (no Dan grade needed).
@@ -169,11 +175,14 @@ pub mod pallet_custom_origins {
 
 	decl_ensure! {
 		pub type Spender: EnsureOrigin<Success = Balance> {
-			SmallTipper = 250 * QUID,
-			BigTipper = 1 * GRAND,
-			SmallSpender = 10 * GRAND,
-			MediumSpender = 100 * GRAND,
-			BigSpender = 1_000 * GRAND,
+			DeprecatedSmallTipper = 1 * QUID,
+			DeprecatedBigTipper = 1 * QUID,
+			DeprecatedSmallSpender = 1 * QUID,
+			DeprecatedMediumSpender = 1 * QUID,
+			DeprecatedBigSpender = 1 * QUID,
+			SmallBudget = 100 * UNITS,
+			MediumBudget = 1_250 * UNITS,
+			BigBudget = 2_500 * UNITS,
 			Treasurer = 10_000 * GRAND,
 		}
 	}
