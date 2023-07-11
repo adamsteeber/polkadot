@@ -130,7 +130,7 @@ const TRACKS_DATA: [(u16, pallet_referenda::TrackInfo<Balance, BlockNumber>); 15
 		11,
 		pallet_referenda::TrackInfo {
 			name: "treasurer",
-			max_deciding: 1,
+			max_deciding: 10,
 			decision_deposit: 1 * GRAND,
 			prepare_period: 48 * HOURS,
 			decision_period: 28 * DAYS,
